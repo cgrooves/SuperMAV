@@ -24,9 +24,9 @@ P.ki_h = ki_h;
 P.kp_V = kp_V;
 P.ki_V = ki_V;
 
-% input step magnitudes
+% input step
 chi_c = 20*pi/180;
-Va_c = 35; % held constant
+Va_c = 35;
 h_c = 110;
 
 % initial conditions
@@ -34,9 +34,8 @@ x0 = [P.pn0, P.pe0, P.pd0, P.u0, P.v0, P.w0, P.phi0, P.theta0, P.psi0,...
     P.p0, P.q0, P.r0];
 
 % solve nonlinear dynamics with gains
-[t,y] = ode45(@(t,y) mav_dynamics(t,y,P,chi_c,h_c,Va_c),[0,50],x0);
+[t,y] = ode45(@(t,y) mav_dynamics(t,y,P,chi_c,h_c,Va_c),[0,],x0);
 
-% Plot course and altitude responses
 if plot_flag == 1
     figure(1)
     plot(t,y(:,9))

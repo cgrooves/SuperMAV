@@ -32,9 +32,7 @@ end
 
 % Get commanded inputs
 Va_c = 35;
-cmds = benchmark_input(t);
-chi_c = cmds(1);
-h_c = cmds(2);
+cmds = benchmark_
 
 % Autopilot - Lateral
 delta_r = 0.0; % hold rudder steady

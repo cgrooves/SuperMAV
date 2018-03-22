@@ -111,7 +111,7 @@ R = inf; % initial turn radiusP.Va0 = 17;
 
 P.pn0    =  0; % initial North position
 P.pe0    =  0; % initial East position
-P.pd0    =  0; % initial Down position (negative altitude)
+P.pd0    =  -100; % initial Down position (negative altitude)
 P.u0     =  P.Va0; % initial velocity along body x-axis
 P.v0     =  0; % initial velocity along body y-axis
 P.w0     =  0; % initial velocity along body z-axis
