@@ -1,62 +1,60 @@
-function [t_rise, t_set, overshoot] = course_response(kp_chi, ki_chi,...
-    kp_phi, kd_phi, ki_phi, kp_theta, kd_theta, ki_theta, kp_h, ki_h,...
-    kp_V, ki_V, plot_flag)
+function [S_chi, S_h, S_Va] = course_response(chi_gains, phi_gains,...
+    theta_gains, h_gains, V_gains, plot_flag)
 
 % get P struct
 vehicle_params;
 
 % Assign control gains to struct
 % Course hold
-P.kp_chi = kp_chi;
-P.ki_chi = ki_chi;
+P.kp_chi = chi_gains(1);
+P.ki_chi = chi_gains(2);
 % Roll hold
-P.kp_phi = kp_phi;
-P.kd_phi = kd_phi;
-P.ki_phi = ki_phi;
+P.kp_phi = phi_gains(1);
+P.kd_phi = phi_gains(2);
+P.ki_phi = phi_gains(3);
 % Pitch hold
-P.kp_theta = kp_theta;
-P.kd_theta = kd_theta;
-P.ki_theta = ki_theta;
+P.kp_theta = theta_gains(1);
+P.kd_theta = theta_gains(2);
+P.ki_theta = theta_gains(3);
 % Altitude Hold
-P.kp_h = kp_h;
-P.ki_h = ki_h;
+P.kp_h = h_gains(1);
+P.ki_h = h_gains(2);
 % Airspeed hold using throttle
-P.kp_V = kp_V;
-P.ki_V = ki_V;
-
-% input step magnitudes
-chi_c = 20*pi/180;
-Va_c = 35; % held constant
-h_c = 110;
+P.kp_V = V_gains(1);
+P.ki_V = V_gains(2);
 
 % initial conditions
 x0 = [P.pn0, P.pe0, P.pd0, P.u0, P.v0, P.w0, P.phi0, P.theta0, P.psi0,...
     P.p0, P.q0, P.r0];
 
 % solve nonlinear dynamics with gains
-[t,y] = ode45(@(t,y) mav_dynamics(t,y,P,chi_c,h_c,Va_c),[0,50],x0);
+[t,y] = ode45(@(t,y) mav_dynamics(t,y,P),[0,50],x0);
+
+chi = y(:,9);
+h = -y(:,3);
+
+u = y(:,4);
+v = y(:,5);
+w = y(:,6);
+
+Va = sqrt(u.^2 + v.^2 + w.^2);
 
 % Plot course and altitude responses
 if plot_flag == 1
     figure(1)
-    plot(t,y(:,9))
+    plot(t,chi)
+    title('Course')
     figure(2)
-    plot(t,-y(:,3))
+    plot(t,h)
+    title('Altitude')
+    figure(3)
+    plot(t,Va)
+    title('Airspeed')
 end
     
 % get stepinfo
-S = stepinfo(y(:,9),t,chi_c);
-
-t_rise = S.RiseTime;
-t_set = S.SettlingTime;
-overshoot = S.Overshoot;
-
-if isnan(t_rise)
-    t_rise = 100;
-end
-
-if isnan(t_set)
-    t_set = 100;
-end
+S_chi = stepinfo(chi,t,30*pi/180);
+S_h = stepinfo(h,t,110);
+S_Va = stepinfo(Va,t,35);
 
 end

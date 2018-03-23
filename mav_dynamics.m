@@ -32,9 +32,7 @@ end
 
 % Get commanded inputs
 Va_c = 35;
-cmds = benchmark_input(t);
-chi_c = cmds(1);
-h_c = cmds(2);
+[chi_c, h_c] = benchmark_input(t);
 
 % Autopilot - Lateral
 delta_r = 0.0; % hold rudder steady
@@ -44,7 +42,7 @@ delta_a = roll_hold(phi_c,phi,p,flag,P);
 
 % Autopilot - Longitudinal (using altitude hold controllers)
 delta_t = airspeed_throttle_hold(Va_c, Va, flag, P);
-theta_c = altitude_hold(h_c, h, q, flag, P);
+theta_c = altitude_hold(h_c, h, flag, P);
 delta_e = pitch_hold(theta_c, theta, q, flag, P);
 
 % get forces and moments
@@ -157,7 +155,7 @@ function delta_t = airspeed_throttle_hold(Va_c, Va, flag, P)
     Va_integrator = Va_integrator + P.Ts/2*(error + Va_error_d1);
     
     % compute output command and saturate
-    delta_t = sat(P.u_trim(4) + P.kp_V*error + P.ki_V*Va_integrator,1,0);
+    delta_t = sat(.46 + P.kp_V*error + P.ki_V*Va_integrator,1,0);
     
     Va_error_d1 = error; % store old error value
     
@@ -239,23 +237,15 @@ end
 function [chi_c, h_c] = benchmark_input(t)
 
     % h_c
-    if t >= 25
-        h_c = 100;
-    elseif t >= 15
-        h_c = 95;
-    elseif t >= 5
-        h_c = 105;
+    if t >= 5
+        h_c = 110;
     else
         h_c = 100;
     end
     
     % chi_c
-    if t >= 20
-        chi_c = 0;
-    elseif t >= 10
-        chi_c = -30;
-    elseif t >= 1
-        chi_c = 30;
+    if t >= 2
+        chi_c = 30*pi/180;
     else
         chi_c = 0;
     end
