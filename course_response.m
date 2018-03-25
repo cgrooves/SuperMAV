@@ -24,7 +24,7 @@ P.kp_V = V_gains(1);
 P.ki_V = V_gains(2);
 
 % initial conditions
-x0 = [P.pn0, P.pe0, P.pd0, P.u0, P.v0, P.w0, P.phi0, P.theta0, P.psi0,...
+x0 = [P.pn0, P.pe0, P.pd0, P.Va0, P.v0, P.w0, P.phi0, P.theta0, P.psi0,...
     P.p0, P.q0, P.r0];
 
 % solve nonlinear dynamics with gains
@@ -33,6 +33,7 @@ x0 = [P.pn0, P.pe0, P.pd0, P.u0, P.v0, P.w0, P.phi0, P.theta0, P.psi0,...
 chi = y(:,9);
 h = -y(:,3);
 
+% Get airspeed
 u = y(:,4);
 v = y(:,5);
 w = y(:,6);
@@ -48,13 +49,10 @@ if plot_flag == 1
     plot(t,h)
     title('Altitude')
     figure(3)
-    plot(t,Va)
-    title('Airspeed')
 end
     
 % get stepinfo
 S_chi = stepinfo(chi,t,30*pi/180);
 S_h = stepinfo(h,t,110);
-S_Va = stepinfo(Va,t,35);
 
 end
