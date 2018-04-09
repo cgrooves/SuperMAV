@@ -1,5 +1,5 @@
 function xdot = mav_dynamics(t,x,P)
-
+%% Initialization
 % Make the state something a little more readable
 pn = x(1);
 pe = x(2);
@@ -30,6 +30,7 @@ if t == 0
     Va = P.Va0;
 end
 
+%% Autopilot Commands
 % Get commanded inputs
 Va_c = 35;
 [chi_c, h_c] = benchmark_input(t);
@@ -45,6 +46,7 @@ delta_t = airspeed_throttle_hold(Va_c, Va, flag, P);
 theta_c = altitude_hold(h_c, h, flag, P);
 delta_e = pitch_hold(theta_c, theta, q, flag, P);
 
+%% Forces and Moments
 % get forces and moments
 uu = forces_moments(x,[delta_e, delta_a, delta_r, delta_t],[0 0 0 0 0 0],P);
 
@@ -56,7 +58,7 @@ m = uu(5);
 n = uu(6);
 Va = uu(7);
 
-% Equations of Motion
+%% Dynamics - Equations of Motion
 %* Checked
 pn_dot = cos(theta)*cos(psi)*u + (sin(phi)*sin(theta)*cos(psi) - cos(phi)*sin(psi))*v + (cos(phi)*sin(theta)*cos(psi) + sin(phi)*sin(psi))*w;
 pe_dot = cos(theta)*sin(psi)*u + (sin(phi)*sin(theta)*sin(psi) + cos(phi)*cos(psi))*v + (cos(phi)*sin(theta)*sin(psi) - sin(phi)*cos(psi))*w;
@@ -83,6 +85,8 @@ xdot = [...
     phi_dot; theta_dot; psi_dot; ...
     p_dot; q_dot; r_dot]; % assign derivatives of states to xdot
 end
+
+%% Autopilot Controllers
 
 % COURSE HOLD****************************************************
 function phi_c = course_hold(chi_c, chi, flag, P)

@@ -1,4 +1,4 @@
-function [S_chi, S_h] = course_response(chi_gains, phi_gains,...
+function [S_chi, S_h, ts_p, ts_q] = course_response(chi_gains, phi_gains,...
     theta_gains, h_gains, V_gains, plot_flag)
 
 % get P struct
@@ -32,6 +32,8 @@ x0 = [P.pn0, P.pe0, P.pd0, P.Va0, P.v0, P.w0, P.phi0, P.theta0, P.psi0,...
 
 chi = y(:,9);
 h = -y(:,3);
+p = y(:,10);
+q = y(:,11);
 
 % Get airspeed
 u = y(:,4);
@@ -49,12 +51,17 @@ if plot_flag == 1
     plot(t,h)
     title('Altitude')
     figure(3)
+    plot(t,p,t,q)
+    title('Roll and pitch rates')
+    legend('p','q')
 end
     
 % get stepinfo
 S_chi = stepinfo(chi,t,30*pi/180);
 S_h = stepinfo(h,t,110);
-ts_p = stepinfo(y(:,10),t,0);
-ts_q = stepinfo(y(:,11),t,0);
+S_p = stepinfo(y(:,10),t,0);
+ts_p = S_p.SettlingTime;
+S_q = stepinfo(y(:,11),t,0);
+ts_q = S_q.SettlingTime;
 
 end
