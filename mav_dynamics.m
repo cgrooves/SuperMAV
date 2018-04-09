@@ -35,14 +35,23 @@ end
 Va_c = 35;
 [chi_c, h_c] = benchmark_input(t);
 
+% display(chi_c);
+% display(h_c);
+% display(t);
+
 % Autopilot - Lateral
 delta_r = 0.0; % hold rudder steady
 
 phi_c = course_hold(chi_c,psi,flag,P);
+
 delta_a = roll_hold(phi_c,phi,p,flag,P);
+
+
 
 % Autopilot - Longitudinal (using altitude hold controllers)
 delta_t = airspeed_throttle_hold(Va_c, Va, flag, P);
+
+
 theta_c = altitude_hold(h_c, h, flag, P);
 delta_e = pitch_hold(theta_c, theta, q, flag, P);
 
