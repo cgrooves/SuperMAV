@@ -1,5 +1,5 @@
 function [S_chi, S_h, ts_p, ts_q] = course_response(chi_gains, phi_gains,...
-    theta_gains, h_gains, V_gains, plot_flag)
+    h_gains, theta_gains, V_gains, plot_flag)
 
 % get P struct
 vehicle_params;
