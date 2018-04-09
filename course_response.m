@@ -1,4 +1,4 @@
-function [S_chi, S_h, S_Va] = course_response(chi_gains, phi_gains,...
+function [S_chi, S_h] = course_response(chi_gains, phi_gains,...
     theta_gains, h_gains, V_gains, plot_flag)
 
 % get P struct
@@ -54,5 +54,7 @@ end
 % get stepinfo
 S_chi = stepinfo(chi,t,30*pi/180);
 S_h = stepinfo(h,t,110);
+ts_p = stepinfo(y(:,10),t,0);
+ts_q = stepinfo(y(:,11),t,0);
 
 end
