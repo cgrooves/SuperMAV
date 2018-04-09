@@ -1,4 +1,4 @@
-function [S_chi, S_h, ts_p, ts_q] = course_response(chi_gains, phi_gains,...
+function out = mav_response(chi_gains, phi_gains,...
     h_gains, theta_gains, V_gains, plot_flag)
 
 % get P struct
@@ -60,8 +60,33 @@ end
 S_chi = stepinfo(chi,t,30*pi/180);
 S_h = stepinfo(h,t,110);
 S_p = stepinfo(y(:,10),t,0);
-ts_p = S_p.SettlingTime;
 S_q = stepinfo(y(:,11),t,0);
-ts_q = S_q.SettlingTime;
+
+[chi_tr, chi_ts, chi_over] = get_stepinfo(S_chi);
+[h_tr, h_ts, h_over] = get_stepinfo(S_h);
+[~,ts_p,~] = get_stepinfo(S_p);
+[~,ts_q,~] = get_stepinfo(S_q);
+
+out = [chi_tr, chi_ts, chi_over, h_tr, h_ts, h_over, ts_p, ts_q];
+
+end
+
+% Takes a stepinfo Structure and gets the rise time (tr), settling time
+% (ts), and overshoot (over). If tr or ts is nan, returns value of 100.
+function [tr, ts, over] = get_stepinfo(SS)
+
+tr = SS.RiseTime;
+
+if isnan(tr)
+    tr = 100;
+end
+
+ts = SS.SettlingTime;
+
+if isnan(ts)
+    ts = 100;
+end
+
+over = SS.Overshoot;
 
 end
