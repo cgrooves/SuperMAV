@@ -33,19 +33,19 @@ def problem_function(x):
     g = [0.0]*2 # Initialize array for constraints G(X)
 
     # Enumerate inputs
-    x[0] = kp_chi
-    x[1] = ki_chi
+    kp_chi = x[0]
+    ki_chi = x[1]
 
-    x[2] = kp_phi
-    x[3] = kd_phi
-    x[4] = ki_phi
+    kp_phi = x[2]
+    kd_phi = x[3]
+    ki_phi = x[4]
 
-    x[5] = kp_h
-    x[6] = ki_h
+    kp_h = x[5]
+    ki_h = x[6]
 
-    x[7] = kp_theta
-    x[8] = kd_theta
-    x[9] = ki_theta
+    kp_theta = x[7]
+    kd_theta = x[8]
+    ki_theta = x[9]
 
     chi_gains = matlab.double([kp_chi,ki_chi])
     phi_gains = matlab.double([kp_phi,kd_phi,ki_phi])
