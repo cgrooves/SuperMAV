@@ -251,18 +251,21 @@ end
 % Benchmark maneuver ******************************
 function [chi_c, h_c] = benchmark_input(t)
 
-    % h_c
-    if t >= 5
-        h_c = 110;
-    else
-        h_c = 100;
-    end
-    
-    % chi_c
-    if t >= 2
-        chi_c = 30*pi/180;
-    else
-        chi_c = 0;
-    end
+%     % h_c
+%     if t >= 10
+%         h_c = 100;
+%     else
+%         h_c = 115;
+%     end
+%     
+%     % chi_c
+%     if t >= 10
+%         chi_c = 0;
+%     else
+%         chi_c = 30*pi/180;
+%     end
+
+h_c = 115;
+chi_c = 30*pi/180;
     
 end

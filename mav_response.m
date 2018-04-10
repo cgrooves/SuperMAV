@@ -58,7 +58,7 @@ end
     
 % get stepinfo
 S_chi = stepinfo(chi,t,30*pi/180);
-S_h = stepinfo(h,t,110);
+S_h = stepinfo(h,t,115);
 S_p = stepinfo(y(:,10),t,0);
 S_q = stepinfo(y(:,11),t,0);
 
