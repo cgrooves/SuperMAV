@@ -58,9 +58,9 @@ end
     
 % get stepinfo
 S_chi = stepinfo(chi,t,30*pi/180);
-S_h = stepinfo(h,t,115);
-S_p = stepinfo(y(:,10),t,0);
-S_q = stepinfo(y(:,11),t,0);
+S_h = stepinfo(h,t,115,'SettlingTimeThreshold',0.1);
+S_p = stepinfo(y(:,10),t,0,'SettlingTimeThreshold',0.1);
+S_q = stepinfo(y(:,11),t,0,'SettlingTimeThreshold',0.1);
 
 [chi_tr, chi_ts, chi_over] = get_stepinfo(S_chi);
 [h_tr, h_ts, h_over] = get_stepinfo(S_h);
