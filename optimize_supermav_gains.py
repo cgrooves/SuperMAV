@@ -29,8 +29,8 @@ engine = matlab.engine.start_matlab()
 
 def problem_function(x):
 
-    f = [0.0]*6 # Initialize array for objectives F(X)
-    g = [0.0]*2 # Initialize array for constraints G(X)
+    f = [0.0]*4 # Initialize array for objectives F(X)
+    g = [0.0]*4 # Initialize array for constraints G(X)
 
     # Enumerate inputs
     kp_chi = x[0]
@@ -73,17 +73,17 @@ def problem_function(x):
 
     # Objectives stated here
     f[0] = tr_chi
-    f[1] = ts_chi
-    f[2] = ov_chi
+    f[1] = ov_chi
 
-    f[3] = tr_h
-    f[4] = ts_h
-    f[5] = ov_h
+    f[2] = tr_h
+    f[3] = ov_h
 
     #  Equality constraints G(X) = 0 MUST COME FIRST in g[0:me-1]
     # Inequality constraints G(X) >= 0 MUST COME SECOND in g[me:m-1]
-    g[0] = 50 - ts_p
-    g[1] = 50 - ts_q
+    g[0] = ts_chi - 5
+    g[1] = ts_h - 5
+    g[2] = 50 - ts_chi
+    g[3] = 50 - ts_h
 
     return f,g
 
@@ -104,10 +104,10 @@ problem['@'] = problem_function # Handle for problem function name
 
 # STEP 1.A: Problem dimensions
 ##############################
-problem['o']  = 6  # Number of objectives
+problem['o']  = 4  # Number of objectives
 problem['n']  = 10  # Number of variables (in total)
 problem['ni'] = 0  # Number of integer variables (0 <= ni <= n)
-problem['m']  = 2  # Number of constraints (in total)
+problem['m']  = 4  # Number of constraints (in total)
 problem['me'] = 0  # Number of equality constraints (0 <= me <= m)
 
 # STEP 1.B: Lower and upper bounds 'xl' & 'xu'
@@ -117,7 +117,8 @@ problem['xu'] = [ 5, 5, 5, 5, 5, 5, 5, 0, 0, 5]
 
 # STEP 1.C: Starting point 'x'
 ##############################
-problem['x'] = problem['xl'] # Here for example: starting point = lower bounds
+problem['x'] = [0.88,.041,.88,.16,.304,.0181,.0039,-1.6,-.4338,0] # Here for example: starting point = lower bounds
+# problem['x'] = problem['xu']
 
 ########################################################################
 ### Step 2: Choose stopping criteria and printing options    ###########
