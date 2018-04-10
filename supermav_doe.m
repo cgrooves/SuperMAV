@@ -31,19 +31,15 @@ q_out = zeros(n,1);
 
 %% RUN THE DOE
 for i = 1:n
-    [S_chi, S_h, ts_p, ts_q] = mav_response(chi_gains(i,:), phi_gains(i,:),...
-        h_gains(i,:), theta_gains(i,:), V_gains(i,:), 0);
     
-    chi_out(i,1) = S_chi.RiseTime;
-    chi_out(i,2) = S_chi.SettlingTime;
-    chi_out(i,3) = S_chi.Overshoot;
+    out = mav_response(chi_gains(i,:), phi_gains(i,:), h_gains(i,:), ...
+    theta_gains(i,:), V_gains(i,:), 0);
+
+    chi_out(i,:) = out(1:3);
+    h_out(i,:) = out(4:6);
+    p_out(i) = out(7);
+    q_out(i) = out(8);
     
-    h_out(i,1) = S_h.RiseTime;
-    h_out(i,2) = S_h.SettlingTime;
-    h_out(i,3) = S_h.Overshoot;
-    
-    p_out(i) = ts_p;
-    q_out(i) = ts_q;
 end
 
 %% Write out Data
