@@ -1,3 +1,5 @@
 *.m~
 *.avs
 *.csv#
+*.pyc
+MIDACO_*
