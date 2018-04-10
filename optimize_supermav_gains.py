@@ -47,11 +47,18 @@ def problem_function(x):
     x[8] = kd_theta
     x[9] = ki_theta
 
+    chi_gains = matlab.double([kp_chi,ki_chi])
+    phi_gains = matlab.double([kp_phi,kd_phi,ki_phi])
+    h_gains = matlab.double([kp_h,ki_h])
+    theta_gains = matlab.double([kp_theta,kd_theta,ki_theta])
+    V_gains = matlab.double([.234,.52])
+
     # Objective functions F(X)
     # Minimize rise time, settling time, overshoot for chi and h
     # Run matlab function, get values
-    out = engine.mav_response([kp_chi,ki_chi],[kp_phi,kd_phi,ki_phi],[kp_h,ki_h],
-    [kp_theta,kd_theta,ki_theta],[.234,.52],0,nargout=8)
+    fun_out = engine.mav_response(chi_gains,phi_gains,h_gains,theta_gains,V_gains,0)
+
+    out = fun_out[0]
 
     tr_chi = out[0]
     ts_chi = out[1]
