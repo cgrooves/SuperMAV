@@ -9,13 +9,14 @@
 doe_inputs = csvread('Inputs/SFLHC_130_kdh.csv',1,0);
 
 % Separate out the inputs
+phi_gains = doe_inputs(:,1:3);
+
 chi_gains = doe_inputs(:,4:5);
 
-phi_gains = doe_inputs(:,1:3);
+theta_gains = doe_inputs(:,6:8);
 
 h_gains = doe_inputs(:,9:11);
 
-theta_gains = doe_inputs(:,6:8);
 % theta_gains(:,3) = -1*theta_gains(:,3);
 
 V_gains = doe_inputs(:,12:13);
@@ -46,7 +47,7 @@ end
 
 %% Write out Data
 
-T = table(chi_gains, phi_gains, h_gains, theta_gains, V_gains,...
+T = table(phi_gains, chi_gains, theta_gains, h_gains, V_gains,...
     chi_out, h_out, p_out, q_out);
 
 writetable(T,'Outputs/supermav_doe_output_130_kdh02.csv');
