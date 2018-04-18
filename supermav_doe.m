@@ -6,7 +6,7 @@
 % ki_theta, kp_h, kd_h, ki_h, kp_V, ki_V
 
 
-doe_inputs = csvread('Inputs/SFLHC_130_kdh.csv',1,0);
+doe_inputs = xlsread('Inputs/Space Filling Latin Hypercube 50 inputs PlusMinus_kdh.xlsx');
 
 % Separate out the inputs
 phi_gains = doe_inputs(:,1:3);
