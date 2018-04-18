@@ -8,6 +8,6 @@ function out = visual_supermav_gains(filename, line)
 gains = csvread(filename,line-1,0,[line-1, 0, line-1, 12]);
 
 % feed the gains into the sim
-out = mav_response(gains(1:2),gains(3:5),gains(6:8),gains(9:11),gains(12:13),1);
+out = mav_response(gains(1:3),gains(4:5),gains(6:8),gains(9:11),gains(12:13),1);
 
 end
