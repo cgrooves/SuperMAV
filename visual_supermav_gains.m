@@ -1,11 +1,10 @@
-function out = visual_supermav_gains(filename, line)
+function out = visual_supermav_gains(filename, line, testing)
 
 % Plot the output of chi, h, and p and q for a particular set of gains
 % found on the line of filename (a .csv file, with gains ordered in sets of
 % kp, kd, ki for: chi, phi, h, theta, V.
 
 % manual gain values
-testing = 1;
 if testing == 1
 kp_chi = 1.2;
 ki_chi = 0.041;
