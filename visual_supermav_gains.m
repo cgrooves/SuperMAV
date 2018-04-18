@@ -19,7 +19,7 @@ ki_h = 0.004;
 
 kp_theta = -1.5;
 kd_theta = -0.4;
-ki_theta = -.5 ;
+ki_theta = .5 ;
 
 kp_V = 0.234;
 ki_V = 0.52;
