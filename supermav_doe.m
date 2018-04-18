@@ -1,12 +1,12 @@
-% File for running a DOE for the SuperMAV gain-finding project
-
-% Load Inputs
+function supermav_doe(filein_path, fileout_path)
+% Function for running a DOE for the SuperMAV gain-finding project
 % Inputs are assumed to be formatted in this manner:
 % kp_phi, kd_phi, ki_phi, kp_chi, ki_chi, kp_theta, kd_theta,
 % ki_theta, kp_h, kd_h, ki_h, kp_V, ki_V
 
 
-doe_inputs = csvread('Inputs/Space Filling Uniform Design 50 inputs kdsmall.csv',1,0);
+doe_inputs = csvread(filein_path,1,0);
+
 
 
 % Separate out the inputs
@@ -51,4 +51,5 @@ end
 T = table(phi_gains, chi_gains, theta_gains, h_gains, V_gains,...
     chi_out, h_out, p_out, q_out);
 
-writetable(T,'Outputs/Space Filling Uniform Design 50 inputs kdsmall_results.csv');
+
+writetable(T,fileout_path);
