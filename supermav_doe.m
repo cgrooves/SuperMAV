@@ -34,7 +34,7 @@ q_out = zeros(n,1);
 %% RUN THE DOE
 for i = 1:n
     
-    out = mav_response(chi_gains(i,:), phi_gains(i,:), h_gains(i,:), ...
+    out = mav_response(chi_gains(i,:), phi_gains(i,:), [h_gains(i,1), 0, h_gains(i,3)], ...
     theta_gains(i,:), V_gains(i,:), 0);
 
     chi_out(i,:) = out(1:3);
@@ -51,4 +51,4 @@ end
 T = table(phi_gains, chi_gains, theta_gains, h_gains, V_gains,...
     chi_out, h_out, p_out, q_out);
 
-writetable(T,'Outputs/supermav_doe_output_kdh_05.csv');
+writetable(T,'Outputs/supermav_doe_output_kdh_06.csv');

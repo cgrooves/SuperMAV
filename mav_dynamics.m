@@ -228,7 +228,7 @@ function delta_e = pitch_hold(theta_c, theta, q, flag, P)
     theta_integrator = theta_integrator + P.Ts/2*(error + theta_integrator_d1);
 
     % Saturated elevator command
-    u_unsat = P.kp_theta*error - P.kd_theta*q + P.ki_theta*theta_integrator;
+    u_unsat = P.kp_theta*error - P.kd_theta*q - P.ki_theta*theta_integrator;
     delta_e = sat(u_unsat, P.delta_e_up, P.delta_e_down);
     
     % Integrator anti-windup scheme
