@@ -6,7 +6,7 @@
 % ki_theta, kp_h, kd_h, ki_h, kp_V, ki_V
 
 
-doe_inputs = csvread('Inputs/SFLHC_130_kdh.csv',1,0);
+doe_inputs = csvread('Inputs/Space Filling Uniform Design 50 inputs PlusMinus kd.csv',1,0);
 
 % Separate out the inputs
 phi_gains = doe_inputs(:,1:3);
@@ -31,7 +31,7 @@ p_out = zeros(n,1);
 q_out = zeros(n,1);
 
 %% RUN THE DOE
-for i = 1:50
+for i = 1:n
     
     out = mav_response(chi_gains(i,:), phi_gains(i,:), h_gains(i,:), ...
     theta_gains(i,:), V_gains(i,:), 0);
@@ -50,4 +50,4 @@ end
 T = table(phi_gains, chi_gains, theta_gains, h_gains, V_gains,...
     chi_out, h_out, p_out, q_out);
 
-writetable(T,'Outputs/supermav_doe_output_130_kdh02.csv');
+writetable(T,'Outputs/supermav_doe_output_kdh_04.csv');
