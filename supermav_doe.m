@@ -51,4 +51,4 @@ end
 T = table(phi_gains, chi_gains, theta_gains, h_gains, V_gains,...
     chi_out, h_out, p_out, q_out);
 
-writetable(T,'Outputs/supermav_doe_output_kdh_06.csv');
+writetable(T,'Outputs/supermav_doe_output_kdh_50.csv');
