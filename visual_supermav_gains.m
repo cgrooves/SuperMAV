@@ -5,9 +5,9 @@ function out = visual_supermav_gains(filename, line)
 % kp, kd, ki for: chi, phi, h, theta, V.
 
 % Read the file and get the gains
-gains = csvread(filename,line-1,0,[line-1, 0, line-1, 11]);
+gains = csvread(filename,line-1,0,[line-1, 0, line-1, 12]);
 
 % feed the gains into the sim
-out = mav_response(gains(1:2),gains(3:5),gains(6:7),gains(8:10),gains(11:12),1);
+out = mav_response(gains(1:2),gains(3:5),gains(6:8),gains(9:11),gains(12:13),1);
 
 end

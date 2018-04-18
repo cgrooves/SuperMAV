@@ -185,19 +185,26 @@ end
 function theta_c = altitude_hold(h_c, h, flag, P)
     persistent h_integrator;
     persistent h_error_d1;
+    persistent h_derivative;
+    persistent h_d1;
+    
+    beta = 0.8; % dirty derivative gain
     
     if flag == 1
         h_integrator = 0;
         h_error_d1 = 0;
+        h_derivative = 0;
+        h_d1 = 0;
     end
     
     error = h_c - h;
     
     % discrete integrator
     h_integrator = h_integrator + P.Ts/2*(error + h_error_d1);
+    h_derivative = beta*h_derivative + (1-beta)/P.Ts*(h - h_d1);
     
     % compute output command        
-    u_unsat = P.kp_h*error + P.ki_h*h_integrator;
+    u_unsat = P.kp_h*error + P.ki_h*h_integrator + P.kd_h*h_derivative;
     theta_c = sat(u_unsat, 15*pi/180, -15*pi/180);
     
     % integrator anti-windup
@@ -206,6 +213,7 @@ function theta_c = altitude_hold(h_c, h, flag, P)
     end    
     
     h_error_d1 = error; % store old error value
+    h_d1 = h; % store old altitude value
     
 
 end

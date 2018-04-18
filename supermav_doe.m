@@ -3,23 +3,22 @@
 % Load Inputs
 % Inputs are assumed to be formatted in this manner:
 % kp_phi, kd_phi, ki_phi, kp_chi, ki_chi, kp_theta, kd_theta,
-% ki_theta, kp_h, ki_h, kp_V, ki_V
-% headers = {'kp_chi','ki_chi','kp_phi','kd_phi','kp_h','ki_h','kp_theta',...
-%     'kd_theta','ki_theta','kp_V','ki_V'};
+% ki_theta, kp_h, kd_h, ki_h, kp_V, ki_V
 
-doe_inputs = csvread('Inputs/SFLHC_50_pts.csv',1,0);
+
+doe_inputs = csvread('Inputs/SFLHC_130_kdh.csv',1,0);
 
 % Separate out the inputs
 chi_gains = doe_inputs(:,4:5);
 
 phi_gains = doe_inputs(:,1:3);
 
-h_gains = doe_inputs(:,9:10);
+h_gains = doe_inputs(:,9:11);
 
 theta_gains = doe_inputs(:,6:8);
-theta_gains(:,3) = -1*theta_gains(:,3);
+% theta_gains(:,3) = -1*theta_gains(:,3);
 
-V_gains = doe_inputs(:,11:12);
+V_gains = doe_inputs(:,12:13);
 
 % Get size of doe
 n = size(doe_inputs,1);
@@ -31,7 +30,7 @@ p_out = zeros(n,1);
 q_out = zeros(n,1);
 
 %% RUN THE DOE
-for i = 1:n
+for i = 1:50
     
     out = mav_response(chi_gains(i,:), phi_gains(i,:), h_gains(i,:), ...
     theta_gains(i,:), V_gains(i,:), 0);
@@ -41,6 +40,8 @@ for i = 1:n
     p_out(i) = out(7);
     q_out(i) = out(8);
     
+    i
+    
 end
 
 %% Write out Data
@@ -48,4 +49,4 @@ end
 T = table(chi_gains, phi_gains, h_gains, theta_gains, V_gains,...
     chi_out, h_out, p_out, q_out);
 
-writetable(T,'Outputs/supermav_doe_output50_002.csv');
+writetable(T,'Outputs/supermav_doe_output_130_kdh02.csv');

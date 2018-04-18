@@ -18,7 +18,8 @@ P.kd_theta = theta_gains(2);
 P.ki_theta = theta_gains(3);
 % Altitude Hold
 P.kp_h = h_gains(1);
-P.ki_h = h_gains(2);
+P.kd_h = h_gains(2);
+P.ki_h = h_gains(3);
 % Airspeed hold using throttle
 P.kp_V = V_gains(1);
 P.ki_V = V_gains(2);
