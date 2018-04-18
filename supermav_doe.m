@@ -34,7 +34,7 @@ q_out = zeros(n,1);
 %% RUN THE DOE
 for i = 1:n
     
-    out = mav_response(chi_gains(i,:), phi_gains(i,:), [h_gains(i,1), 0, h_gains(i,3)], ...
+    out = mav_response(chi_gains(i,:), phi_gains(i,:), h_gains(i,:), ...
     theta_gains(i,:), V_gains(i,:), 0);
 
     chi_out(i,:) = out(1:3);
