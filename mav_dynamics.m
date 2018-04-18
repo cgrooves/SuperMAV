@@ -42,7 +42,7 @@ Va_c = 35;
 % Autopilot - Lateral
 delta_r = 0.0; % hold rudder steady
 
-phi_c = course_hold(chi_c,psi,flag,P);
+phi_c = course_hold(chi_c,psi, r, flag,P);
 
 delta_a = roll_hold(phi_c,phi,p,flag,P);
 
@@ -52,7 +52,7 @@ delta_a = roll_hold(phi_c,phi,p,flag,P);
 delta_t = airspeed_throttle_hold(Va_c, Va, flag, P);
 
 % Calculate hdot
-hdot = -(-sin(theta) + sin(phi)*cos(theta)*v + cos(phi)*cos(theta)*w);
+hdot = -(-sin(theta)*u + sin(phi)*cos(theta)*v + cos(phi)*cos(theta)*w);
 
 theta_c = altitude_hold(h_c, h, hdot, flag, P);
 delta_e = pitch_hold(theta_c, theta, q, flag, P);
@@ -100,7 +100,7 @@ end
 %% Autopilot Controllers
 
 % COURSE HOLD****************************************************
-function phi_c = course_hold(chi_c, chi, flag, P)
+function phi_c = course_hold(chi_c, chi, r, flag, P)
     persistent chi_integrator;
     persistent chi_error_d1;
     
@@ -111,8 +111,8 @@ function phi_c = course_hold(chi_c, chi, flag, P)
     
     error = chi_c - chi;
     
-    % discrete integrator
-    chi_integrator = chi_integrator + P.Ts/2*(error + chi_error_d1);
+
+    
     
     % compute output command and saturate
     u_unsat = P.kp_chi*error + P.ki_chi*chi_integrator;
@@ -121,8 +121,8 @@ function phi_c = course_hold(chi_c, chi, flag, P)
     chi_error_d1 = error; % store old error value
     
     % integrator anti-windup
-    if P.ki_chi ~= 0
-        chi_integrator = chi_integrator + P.Ts/P.ki_chi*(phi_c - u_unsat);
+    if r < (.05*pi/180)
+        chi_integrator = chi_integrator + P.Ts/2*(error + chi_error_d1);
     end
 end
 
@@ -196,15 +196,16 @@ function theta_c = altitude_hold(h_c, h, hdot, flag, P)
     error = h_c - h;
     
     % discrete integrator
-    h_integrator = h_integrator + P.Ts/2*(error + h_error_d1);
+%     h_integrator = h_integrator + P.Ts/2*(error + h_error_d1);
+%     h_integrator = 0;
     
     % compute output command        
     u_unsat = P.kp_h*error + P.ki_h*h_integrator - P.kd_h*hdot;
     theta_c = sat(u_unsat, 15*pi/180, -15*pi/180);
     
     % integrator anti-windup
-    if P.ki_h ~= 0
-        h_integrator = h_integrator + P.Ts/P.ki_h*(theta_c - u_unsat);
+    if hdot < 1/8
+        h_integrator = h_integrator + P.Ts/2*(error + h_error_d1);
     end    
     
     h_error_d1 = error; % store old error value    

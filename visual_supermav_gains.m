@@ -5,7 +5,9 @@ function out = visual_supermav_gains(filename, line)
 % kp, kd, ki for: chi, phi, h, theta, V.
 
 % manual gain values
-testing = 1;
+testing = 0;
+
+%0.8334676653 0.2273474405 0.0443266679	0.8713732387 0.0321808206 -1.550216088	-0.439034261	0.1016174519	0.019258324	0.0312002239	0.0048925131	0.2256158086	0.5272960243
 if testing == 1
 kp_chi = 1.2;
 ki_chi = 0.041;
