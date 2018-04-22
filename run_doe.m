@@ -1,4 +1,4 @@
-filein_path = 'Inputs/Space Filling Latin Hypercube 5000 inputs wide range.csv';
-fileout_path = 'Outputs/sflhc_5000_001.csv';
+filein_path = 'Inputs/sflhc_5000_002.csv';
+fileout_path = 'Outputs/sflhc_5000_002.csv';
 
 supermav_doe(filein_path,fileout_path)
