@@ -16,25 +16,24 @@ function y = autopilot(uu,P)
     u       = uu(4+NN);  % airspeed
     v       = uu(5+NN);
     w       = uu(6+NN);
-    phi      = uu(7+NN);  % roll angle
-    theta    = uu(8+NN);  % pitch angle
-    chi      = uu(9+NN);  % course angle
-    p        = uu(10+NN); % body frame roll rate
-    q        = uu(11+NN); % body frame pitch rate
-    r        = uu(12+NN); % body frame yaw rate
-    NN = NN + 12;
-    Va = uu(1 + NN);
-
-    NN = NN+19;
-    Va_c     = uu(20);  % commanded airspeed (m/s)
-    h_c      = uu(21);  % commanded altitude (m)
-    chi_c    = uu(22);  % commanded course (rad)
+    Va = uu(7+NN);
+    alpha = uu(8+NN);
+    beta_air = uu(9+NN);
+    phi      = uu(10+NN);  % roll angle
+    theta    = uu(11+NN);  % pitch angle
+    chi      = uu(12+NN);  % course angle
+    p        = uu(13+NN); % body frame roll rate
+    q        = uu(14+NN); % body frame pitch rate
+    r        = uu(15+NN); % body frame yaw rate
+    NN = NN+22;
+    Va_c     = uu(23);  % commanded airspeed (m/s)
+    h_c      = uu(24);  % commanded altitude (m)
+    chi_c    = uu(25);  % commanded course (rad)
     NN = NN+3;
-    t        = uu(23);   % time
+    t        = uu(26);   % time
     
     % Calculate
-%     hdot = -(-sin(theta)*u + sin(phi)*cos(theta)*v + cos(phi)*cos(theta)*w);
-hdot = 0;
+    hdot = -(-sin(theta)*u + sin(phi)*cos(theta)*v + cos(phi)*cos(theta)*w);
     
     autopilot_version = 2;
         % autopilot_version == 1 <- used for tuning
