@@ -53,6 +53,7 @@ delta_t = airspeed_throttle_hold(Va_c, Va, flag, P);
 
 % Calculate hdot
 hdot = -(-sin(theta)*u + sin(phi)*cos(theta)*v + cos(phi)*cos(theta)*w);
+% hdot = 0;
 
 theta_c = altitude_hold(h_c, h, hdot, flag, P);
 delta_e = pitch_hold(theta_c, theta, q, flag, P);
@@ -106,14 +107,10 @@ function phi_c = course_hold(chi_c, chi, r, flag, P)
     
     if flag == 1
         chi_integrator = 0;
-        chi_error_d1 = 0;
     end
     
     error = chi_c - chi;
-    
 
-    
-    
     % compute output command and saturate
     u_unsat = P.kp_chi*error + P.ki_chi*chi_integrator;
     phi_c = sat(u_unsat, 15*pi/180, -15*pi/180);
@@ -150,8 +147,7 @@ function delta_a = roll_hold(phi_c, phi, p, flag, P)
         phi_integrator = phi_integrator + P.Ts/P.ki_phi*(delta_a - u_unsat);
     end
     
-    phi_error_d1 = error; % store old error value
-    
+    phi_error_d1 = error; % store old error value    
 
 end
 
@@ -252,20 +248,6 @@ end
 
 % Benchmark maneuver ******************************
 function [chi_c, h_c] = benchmark_input(t)
-
-%     % h_c
-%     if t >= 10
-%         h_c = 100;
-%     else
-%         h_c = 115;
-%     end
-%     
-%     % chi_c
-%     if t >= 10
-%         chi_c = 0;
-%     else
-%         chi_c = 30*pi/180;
-%     end
 
 h_c = 115;
 chi_c = 30*pi/180;

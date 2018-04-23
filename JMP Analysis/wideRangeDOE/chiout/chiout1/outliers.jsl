@@ -1,0 +1,1258 @@
+
+Fit Model(
+	Y( :chi_out_1 ),
+	Effects(
+		:phi_gains_1,
+		:phi_gains_2,
+		:phi_gains_3,
+		:chi_gains_1,
+		:chi_gains_2,
+		:theta_gains_1,
+		:theta_gains_3,
+		:h_gains_1,
+		:h_gains_2,
+		:h_gains_3,
+		:V_gains_1,
+		:V_gains_2,
+		:phi_gains_1 * :phi_gains_3,
+		:phi_gains_1 * :chi_gains_1,
+		:phi_gains_1 * :chi_gains_2,
+		:phi_gains_1 * :theta_gains_3,
+		:phi_gains_1 * :V_gains_2,
+		:phi_gains_2 * :chi_gains_1,
+		:phi_gains_2 * :h_gains_1,
+		:phi_gains_2 * :V_gains_1,
+		:phi_gains_3 * :chi_gains_1,
+		:phi_gains_3 * :theta_gains_3,
+		:chi_gains_1 * :chi_gains_2,
+		:chi_gains_1 * :theta_gains_1,
+		:chi_gains_1 * :theta_gains_3,
+		:chi_gains_1 * :h_gains_1,
+		:chi_gains_1 * :h_gains_2,
+		:chi_gains_1 * :h_gains_3,
+		:chi_gains_1 * :V_gains_1,
+		:chi_gains_1 * :V_gains_2,
+		:chi_gains_2 * :theta_gains_3,
+		:chi_gains_2 * :h_gains_1,
+		:chi_gains_2 * :h_gains_2,
+		:chi_gains_2 * :h_gains_3,
+		:chi_gains_2 * :V_gains_2,
+		:theta_gains_1 * :h_gains_1,
+		:theta_gains_1 * :h_gains_3,
+		:theta_gains_3 * :V_gains_2,
+		:h_gains_1 * :h_gains_3,
+		:h_gains_1 * :V_gains_1,
+		:h_gains_2 * :h_gains_3,
+		:phi_gains_1 * :phi_gains_3 * :chi_gains_1,
+		:phi_gains_1 * :phi_gains_3 * :theta_gains_3,
+		:phi_gains_1 * :chi_gains_1 * :chi_gains_2,
+		:phi_gains_1 * :chi_gains_1 * :theta_gains_3,
+		:phi_gains_1 * :chi_gains_1 * :V_gains_2,
+		:phi_gains_1 * :chi_gains_2 * :theta_gains_3,
+		:phi_gains_1 * :chi_gains_2 * :V_gains_2,
+		:phi_gains_2 * :chi_gains_1 * :h_gains_1,
+		:phi_gains_2 * :chi_gains_1 * :V_gains_1,
+		:phi_gains_2 * :h_gains_1 * :V_gains_1,
+		:phi_gains_3 * :chi_gains_1 * :theta_gains_3,
+		:chi_gains_1 * :chi_gains_2 * :theta_gains_3,
+		:chi_gains_1 * :chi_gains_2 * :h_gains_1,
+		:chi_gains_1 * :chi_gains_2 * :h_gains_2,
+		:chi_gains_1 * :chi_gains_2 * :h_gains_3,
+		:chi_gains_1 * :chi_gains_2 * :V_gains_2,
+		:chi_gains_1 * :theta_gains_1 * :h_gains_1,
+		:chi_gains_1 * :theta_gains_1 * :h_gains_3,
+		:chi_gains_1 * :theta_gains_3 * :V_gains_2,
+		:chi_gains_1 * :h_gains_1 * :h_gains_3,
+		:chi_gains_1 * :h_gains_1 * :V_gains_1,
+		:chi_gains_1 * :h_gains_2 * :h_gains_3,
+		:chi_gains_2 * :theta_gains_3 * :V_gains_2,
+		:chi_gains_2 * :h_gains_1 * :h_gains_3,
+		:chi_gains_2 * :h_gains_2 * :h_gains_3,
+		:theta_gains_1 * :h_gains_1 * :h_gains_3,
+		:phi_gains_1 * :phi_gains_3 * :chi_gains_1 * :theta_gains_3,
+		:phi_gains_1 * :chi_gains_1 * :chi_gains_2 * :theta_gains_3,
+		:phi_gains_1 * :chi_gains_1 * :chi_gains_2 * :V_gains_2,
+		:phi_gains_2 * :chi_gains_1 * :h_gains_1 * :V_gains_1,
+		:chi_gains_1 * :chi_gains_2 * :theta_gains_3 * :V_gains_2,
+		:chi_gains_1 * :chi_gains_2 * :h_gains_1 * :h_gains_3,
+		:chi_gains_1 * :chi_gains_2 * :h_gains_2 * :h_gains_3,
+		:chi_gains_1 * :theta_gains_1 * :h_gains_1 * :h_gains_3,
+		:phi_gains_3 * :phi_gains_3,
+		:phi_gains_3 * :phi_gains_3 * :phi_gains_3,
+		:phi_gains_3 * :phi_gains_3 * :phi_gains_3 * :phi_gains_3,
+		:chi_gains_1 * :chi_gains_1,
+		:chi_gains_1 * :chi_gains_1 * :chi_gains_1,
+		:chi_gains_1 * :chi_gains_1 * :chi_gains_1 * :chi_gains_1
+	),
+	Personality( "Standard Least Squares" ),
+	Emphasis( "Minimal Report" ),
+	Run(
+		:chi_out_1 << {Lack of Fit( 0 ), Plot Actual by Predicted( 1 ),
+		Plot Regression( 0 ), Plot Residual by Predicted( 1 ),
+		Plot Effect Leverage( 1 )}
+	),
+	SendToReport(
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_1", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_2", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_1", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_2", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "theta_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "theta_gains_1",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "theta_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "theta_gains_3",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "h_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "h_gains_1", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "h_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "h_gains_2", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "h_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "h_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "V_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "V_gains_1", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "V_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "V_gains_2", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_1*phi_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_1*phi_gains_3",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_1*chi_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_1*chi_gains_1",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_1*chi_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_1*chi_gains_2",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_1*theta_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_1*theta_gains_3",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_1*V_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_1*V_gains_2",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_2*chi_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_2*chi_gains_1",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_2*h_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_2*h_gains_1",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_2*V_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_2*V_gains_1",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_3*chi_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_3*chi_gains_1",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_3*theta_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_3*theta_gains_3",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_1*chi_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_1*chi_gains_2",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_1*theta_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_1*theta_gains_1",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_1*theta_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_1*theta_gains_3",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_1*h_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_1*h_gains_1",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_1*h_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_1*h_gains_2",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_1*h_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_1*h_gains_3",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_1*V_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_1*V_gains_1",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_1*V_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_1*V_gains_2",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_2*theta_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_2*theta_gains_3",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_2*h_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_2*h_gains_1",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_2*h_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_2*h_gains_2",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_2*h_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_2*h_gains_3",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_2*V_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_2*V_gains_2",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "theta_gains_1*h_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "theta_gains_1*h_gains_1",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "theta_gains_1*h_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "theta_gains_1*h_gains_3",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "theta_gains_3*V_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "theta_gains_3*V_gains_2",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "h_gains_1*h_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "h_gains_1*h_gains_3",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "h_gains_1*V_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "h_gains_1*V_gains_1",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "h_gains_2*h_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "h_gains_2*h_gains_3",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_1*phi_gains_3*chi_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_1*phi_gains_3*chi_gains_1", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_1*phi_gains_3*theta_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_1*phi_gains_3*theta_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_1*chi_gains_1*chi_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_1*chi_gains_1*chi_gains_2", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_1*chi_gains_1*theta_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_1*chi_gains_1*theta_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_1*chi_gains_1*V_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_1*chi_gains_1*V_gains_2", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_1*chi_gains_2*theta_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_1*chi_gains_2*theta_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_1*chi_gains_2*V_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_1*chi_gains_2*V_gains_2", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_2*chi_gains_1*h_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_2*chi_gains_1*h_gains_1", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_2*chi_gains_1*V_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_2*chi_gains_1*V_gains_1", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_2*h_gains_1*V_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_2*h_gains_1*V_gains_1", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_3*chi_gains_1*theta_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_3*chi_gains_1*theta_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*chi_gains_2*theta_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*chi_gains_2*theta_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*chi_gains_2*h_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*chi_gains_2*h_gains_1", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*chi_gains_2*h_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*chi_gains_2*h_gains_2", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*chi_gains_2*h_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*chi_gains_2*h_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*chi_gains_2*V_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*chi_gains_2*V_gains_2", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*theta_gains_1*h_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*theta_gains_1*h_gains_1", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*theta_gains_1*h_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*theta_gains_1*h_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*theta_gains_3*V_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*theta_gains_3*V_gains_2", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*h_gains_1*h_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*h_gains_1*h_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*h_gains_1*V_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*h_gains_1*V_gains_1", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*h_gains_2*h_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*h_gains_2*h_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_2*theta_gains_3*V_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_2*theta_gains_3*V_gains_2", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_2*h_gains_1*h_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_2*h_gains_1*h_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_2*h_gains_2*h_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_2*h_gains_2*h_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"theta_gains_1*h_gains_1*h_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"theta_gains_1*h_gains_1*h_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_1*phi_gains_3*chi_gains_1*theta_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_1*phi_gains_3*chi_gains_1*theta_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_1*chi_gains_1*chi_gains_2*theta_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_1*chi_gains_1*chi_gains_2*theta_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_1*chi_gains_1*chi_gains_2*V_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_1*chi_gains_1*chi_gains_2*V_gains_2", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_2*chi_gains_1*h_gains_1*V_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_2*chi_gains_1*h_gains_1*V_gains_1", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*chi_gains_2*theta_gains_3*V_gains_2"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*chi_gains_2*theta_gains_3*V_gains_2", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*chi_gains_2*h_gains_1*h_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*chi_gains_2*h_gains_1*h_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*chi_gains_2*h_gains_2*h_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*chi_gains_2*h_gains_2*h_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*theta_gains_1*h_gains_1*h_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*theta_gains_1*h_gains_1*h_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_3*phi_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "phi_gains_3*phi_gains_3",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_3*phi_gains_3*phi_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_3*phi_gains_3*phi_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_3*phi_gains_3*phi_gains_3*phi_gains_3"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"phi_gains_3*phi_gains_3*phi_gains_3*phi_gains_3", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_1*chi_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details", "chi_gains_1*chi_gains_1",
+			"Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*chi_gains_1*chi_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*chi_gains_1*chi_gains_1", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*chi_gains_1*chi_gains_1*chi_gains_1"},
+			"Leverage Plot",
+			OutlineBox,
+			{Set Base Font( "Title" )}
+		),
+		Dispatch(
+			{"Response chi_out_1", "Effect Details",
+			"chi_gains_1*chi_gains_1*chi_gains_1*chi_gains_1", "Leverage Plot"},
+			"FitLS Leverage",
+			FrameBox,
+			{Left( 1 ), Right( 1 ), Top( 1 ), Bottom( 1 ), Grid Line Order( 4 ),
+			Reference Line Order( 5 )}
+		)
+	)
+);
