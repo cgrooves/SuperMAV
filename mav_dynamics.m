@@ -121,7 +121,7 @@ function phi_c = course_hold(chi_c, chi, r, flag, P)
     chi_error_d1 = error; % store old error value
     
     % integrator anti-windup
-    if r < (.05*pi/180)
+    if r < (1*pi/180)
         chi_integrator = chi_integrator + P.Ts/2*(error + chi_error_d1);
     end
 end
@@ -146,7 +146,7 @@ function delta_a = roll_hold(phi_c, phi, p, flag, P)
     delta_a = sat(u_unsat, P.delta_a_up, P.delta_a_down);
     
     % integrator anti-windup
-    if P.ki_phi ~= 0
+    if P.ki_phi ~= 0% < 5*pi/180
         phi_integrator = phi_integrator + P.Ts/P.ki_phi*(delta_a - u_unsat);
     end
     
@@ -204,7 +204,7 @@ function theta_c = altitude_hold(h_c, h, hdot, flag, P)
     theta_c = sat(u_unsat, 15*pi/180, -15*pi/180);
     
     % integrator anti-windup
-    if hdot < 1/8
+    if hdot < 1/1000
         h_integrator = h_integrator + P.Ts/2*(error + h_error_d1);
     end    
     
@@ -226,14 +226,14 @@ function delta_e = pitch_hold(theta_c, theta, q, flag, P)
     error = theta_c - theta; % define theta error
     
     % integrated error - discrete algorithm
-    theta_integrator = theta_integrator + P.Ts/2*(error + theta_integrator_d1);
+%     theta_integrator = theta_integrator + P.Ts/2*(error + theta_integrator_d1);
 
     % Saturated elevator command
     u_unsat = P.kp_theta*error - P.kd_theta*q - P.ki_theta*theta_integrator;
     delta_e = sat(u_unsat, P.delta_e_up, P.delta_e_down);
     
     % Integrator anti-windup scheme
-    if P.ki_theta ~= 0
+    if q < 1*pi/180
         theta_integrator = theta_integrator + P.Ts/2*(delta_e - u_unsat);
     end
 
