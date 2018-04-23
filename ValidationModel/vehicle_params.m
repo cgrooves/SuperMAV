@@ -143,7 +143,7 @@ P.x_trim = x_trim;
 % Set initial conditions to trim conditions
 P.pn0 = -1000;
 P.pe0 = 0;
-P.pd0 = 0;
+P.pd0 = -100;
 P.u0 = x_trim(4);
 P.v0 = x_trim(5);
 P.w0 = x_trim(6);
