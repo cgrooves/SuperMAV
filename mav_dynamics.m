@@ -200,7 +200,7 @@ function theta_c = altitude_hold(h_c, h, hdot, flag, P)
     theta_c = sat(u_unsat, 15*pi/180, -15*pi/180);
     
     % integrator anti-windup
-    if hdot < 1/1000
+    if hdot < 1/100
         h_integrator = h_integrator + P.Ts/2*(error + h_error_d1);
     end    
     

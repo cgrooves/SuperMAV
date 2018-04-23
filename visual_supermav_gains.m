@@ -25,6 +25,24 @@ ki_theta = .5 ;
 kp_V = 0.234;
 ki_V = 0.52;
 
+% kp_chi = 1;
+% ki_chi = 0.06;
+% 
+% kp_phi = 0.996;
+% kd_phi = 0.4;
+% ki_phi = 0.484;
+% 
+% kp_h = 0.019;
+% kd_h = 0.003;
+% ki_h = 0.006;
+% 
+% kp_theta = -.989;
+% kd_theta = -.228;
+% ki_theta = .696 ;
+% 
+% kp_V = 0.204;
+% ki_V = 0.45;
+
 gains = [kp_phi kd_phi ki_phi kp_chi ki_chi kp_theta kd_theta ki_theta kp_h kd_h ki_h kp_V ki_V];
 else
 % Read the file and get the gains
