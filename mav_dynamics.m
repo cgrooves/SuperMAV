@@ -46,8 +46,6 @@ phi_c = course_hold(chi_c,psi, r, flag,P);
 
 delta_a = roll_hold(phi_c,phi,p,flag,P);
 
-
-
 % Autopilot - Longitudinal (using altitude hold controllers)
 delta_t = airspeed_throttle_hold(Va_c, Va, flag, P);
 

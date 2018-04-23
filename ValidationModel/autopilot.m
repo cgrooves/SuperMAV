@@ -199,12 +199,9 @@ function [delta, x_command] = autopilot_uavbook(Va_c,h_c,chi_c,Va,h,chi,phi,thet
     %----------------------------------------------------------
     % longitudinal autopilot
     
-    % define persistent variable for state of altitude state machine
-    persistent altitude_state;
-    
     % initialize persistent variable
     if t==0
-        h = -P.pd0;
+%         h = -P.pd0;
                 
         % initialize controllers
         airspeed_throttle_hold(Va_c, Va, 1, P);

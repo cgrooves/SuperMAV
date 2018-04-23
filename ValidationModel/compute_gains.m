@@ -123,7 +123,7 @@
 % P.kd_h = 0;
 % P.ki_theta = 0;
 %% Enter filename, line number to read in gains from
-filename = '../Outputs/sfud_50_002.csv';
+filename = '../Outputs/sflhc_5000_001.csv';
 line = 6;
 gains = csvread(filename,line-1,0,[line-1, 0, line-1, 12]);
 
