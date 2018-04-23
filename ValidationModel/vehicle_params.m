@@ -72,7 +72,7 @@ P.delta_t_up = 1;
 P.delta_t_down = 0;
 
 % Take-off Values
-P.altitude_hold_zone = 80;
+P.altitude_hold_zone = 300;
 P.altitude_take_off_zone = 50;
 P.theta_take_off = 10*pi/180;
 
@@ -143,7 +143,7 @@ P.x_trim = x_trim;
 % Set initial conditions to trim conditions
 P.pn0 = -1000;
 P.pe0 = 0;
-P.pd0 = -100;
+P.pd0 = 0;
 P.u0 = x_trim(4);
 P.v0 = x_trim(5);
 P.w0 = x_trim(6);
