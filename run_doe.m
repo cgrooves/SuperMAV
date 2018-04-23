@@ -1,4 +1,4 @@
-filein_path = 'Inputs/sflhc_5000_002.csv';
-fileout_path = 'Outputs/sflhc_5000_002.csv';
+filein_path = 'Inputs/sflhc_100_001.csv';
+fileout_path = 'Outputs/sflhc_100_001.csv';
 
 supermav_doe(filein_path,fileout_path)
