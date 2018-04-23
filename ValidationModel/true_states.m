@@ -83,25 +83,25 @@ function xhat = true_states(uu,P)
         pnhat;...%1
         pehat;...%2
         hhat;...%3
-        u;...%4
-        v;...%5
-        w;...%6
-        Vahat;...%7
-        alphahat;...%8
-        betahat;...%9
-        phihat;...%10
-        thetahat;...%11
-        chihat;...%12
-        phat;...%13
-        qhat;...%14
-        rhat;...%15
-        Vghat;...%16
-        wnhat;...%17
-        wehat;...%18
-        psihat;...%19
-        bxhat;...%20
-        byhat;...%21
-        bzhat;...%22
+        Vahat;...%4
+        alphahat;...%5
+        betahat;...%6
+        phihat;...%7
+        thetahat;...%8
+        chihat;...%9
+        phat;...%10
+        qhat;...%11
+        rhat;...%12
+        Vghat;...%13
+        wnhat;...%14
+        wehat;...%15
+        psihat;...%16
+        bxhat;...%17
+        byhat;...%18
+        bzhat;...%19
+        u;...%20
+        v;...%21
+        w;...%22
         ];
     
 end 
