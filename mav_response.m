@@ -45,13 +45,15 @@ Va = sqrt(u.^2 + v.^2 + w.^2);
 
 % Plot course and altitude responses
 if plot_flag == 1
-    figure(1)
+    a = gcf;
+    idx = a.Number;
+    figure(idx+1)
     plot(t,chi*180/pi)
     title('Course')
-    figure(2)
+    figure(idx+2)
     plot(t,h)
     title('Altitude')
-    figure(3)
+    figure(idx+3)
     plot(t,p,t,q)
     title('Roll and pitch rates')
     legend('p','q')

@@ -72,9 +72,9 @@ P.delta_t_up = 1;
 P.delta_t_down = 0;
 
 % Take-off Values
-P.altitude_hold_zone = 500;
-P.altitude_take_off_zone = 200;
-P.theta_take_off = 15*pi/180;
+P.altitude_hold_zone = 80;
+P.altitude_take_off_zone = 50;
+P.theta_take_off = 10*pi/180;
 
 % Gamma values % Checked*
 P.Gamma = P.Jx*P.Jz - P.Jxz^2;
@@ -109,20 +109,18 @@ P.Va0 = 35; % initial airspeed
 gamma = 0*pi/180; % initial flight path angle
 R = inf; % initial turn radiusP.Va0 = 17;
 
-P.pn0    =  0; % initial North position
+P.pn0    =  -1000; % initial North position
 P.pe0    =  0; % initial East position
-P.pd0    =  -100; % initial Down position (negative altitude)
+P.pd0    =  0; % initial Down position (negative altitude)
 P.u0     =  P.Va0; % initial velocity along body x-axis
 P.v0     =  0; % initial velocity along body y-axis
 P.w0     =  0; % initial velocity along body z-axis
 P.phi0   =  0; % initial roll angle
-P.theta0 =  0*pi/180; % initial pitch angle
+P.theta0 =  0; % initial pitch angle
 P.psi0   =  0; % initial yaw angle
 P.p0     =  0; % initial body frame roll rate
 P.q0     =  0; % initial body frame pitch rate
 P.r0     =  0; % initial body frame yaw rate
-
-P.Ts = 0.01;
 
 % wind parameters
 P.wind_n = 0;%3;
@@ -134,3 +132,34 @@ P.L_w = 50;
 P.sigma_u = 1.06; 
 P.sigma_v = 1.06;
 P.sigma_w = .7;
+
+P.Ts = 0.01;
+
+% compute trim
+[x_trim, u_trim] = compute_trim('mavsim_trim',P.Va0,gamma,R);
+P.u_trim = u_trim;
+P.x_trim = x_trim;
+
+% Set initial conditions to trim conditions
+P.pn0 = -1000;
+P.pe0 = 0;
+P.pd0 = -100;
+P.u0 = x_trim(4);
+P.v0 = x_trim(5);
+P.w0 = x_trim(6);
+P.phi0 = x_trim(7);
+P.theta0 = x_trim(8);
+P.psi0 = x_trim(9);
+P.p0 = x_trim(10);
+P.q0 = x_trim(11);
+P.r0 = x_trim(12);
+
+% Get linear transfer function models
+% compute different transfer functions
+[T_phi_delta_a,T_chi_phi,T_theta_delta_e,T_h_theta,T_h_Va,T_Va_delta_t,T_Va_theta,T_v_delta_r]...
+    = compute_tf_model(x_trim,u_trim,P);
+
+run('compute_gains.m')
+% 
+% % linearize the equations of motion around trim conditions
+%[A_lon, B_lon, A_lat, B_lat] = compute_ss_model('mavsim_trim',x_trim,u_trim);
