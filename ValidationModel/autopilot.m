@@ -13,38 +13,44 @@ function y = autopilot(uu,P)
 %    pn       = uu(1+NN);  % inertial North position
 %    pe       = uu(2+NN);  % inertial East position
     h        = uu(3+NN);  % altitude
-    u       = uu(4+NN);  % airspeed
-    v       = uu(5+NN);
-    w       = uu(6+NN);
-    Va = uu(7+NN);
-    alpha = uu(8+NN);
-    beta_air = uu(9+NN);
-    phi      = uu(10+NN);  % roll angle
-    theta    = uu(11+NN);  % pitch angle
-    chi      = uu(12+NN);  % course angle
-    p        = uu(13+NN); % body frame roll rate
-    q        = uu(14+NN); % body frame pitch rate
-    r        = uu(15+NN); % body frame yaw rate
+    Va       = uu(4+NN);  % airspeed
+    alpha    = uu(5+NN);  % angle of attack
+    beta_air     = uu(6+NN);  % side slip angle
+    phi      = uu(7+NN);  % roll angle
+    theta    = uu(8+NN);  % pitch angle
+    chi      = uu(9+NN);  % course angle
+    p        = uu(10+NN); % body frame roll rate
+    q        = uu(11+NN); % body frame pitch rate
+    r        = uu(12+NN); % body frame yaw rate
+%    Vg       = uu(13+NN); % ground speed
+%    wn       = uu(14+NN); % wind North
+%    we       = uu(15+NN); % wind East
+%    psi      = uu(16+NN); % heading
+%    bx       = uu(17+NN); % x-gyro bias
+%    by       = uu(18+NN); % y-gyro bias
+%    bz       = uu(19+NN); % z-gyro bias
+u = uu(20+NN);
+v = uu(21+NN);
+w = uu(22+NN);
     NN = NN+22;
-    Va_c     = uu(23);  % commanded airspeed (m/s)
-    h_c      = uu(24);  % commanded altitude (m)
-    chi_c    = uu(25);  % commanded course (rad)
+    Va_c     = uu(1+NN);  % commanded airspeed (m/s)
+    h_c      = uu(2+NN);  % commanded altitude (m)
+    chi_c    = uu(3+NN);  % commanded course (rad)
     NN = NN+3;
-    t        = uu(26);   % time
+    t        = uu(1+NN);   % time
     
-    % Calculate
-    hdot = -(-sin(theta)*u + sin(phi)*cos(theta)*v + cos(phi)*cos(theta)*w);
+hdot = -(-sin(theta)*u + sin(phi)*cos(theta)*v + cos(phi)*cos(theta)*w);
     
     autopilot_version = 2;
         % autopilot_version == 1 <- used for tuning
         % autopilot_version == 2 <- standard autopilot defined in book
         % autopilot_version == 3 <- Total Energy Control for longitudinal AP
     switch autopilot_version
-        case 1
+        case 1,
            [delta, x_command] = autopilot_tuning(Va_c,h_c,chi_c,Va,h,chi,phi,theta,p,q,r,t,P);
-        case 2
+        case 2,
            [delta, x_command] = autopilot_uavbook(Va_c,h_c,chi_c,Va,h,chi,phi,theta,p,q,r,t,P,hdot);
-        case 3
+        case 3,
                [delta, x_command] = autopilot_TECS(Va_c,h_c,chi_c,Va,h,chi,phi,theta,p,q,r,t,P);
     end
     y = [delta; x_command];
@@ -204,19 +210,20 @@ function [delta, x_command] = autopilot_uavbook(Va_c,h_c,chi_c,Va,h,chi,phi,thet
     
     % initialize persistent variable
     if t==0
-        h = -P.pd0;
                 
         % initialize controllers
-        airspeed_throttle_hold(Va_c, Va, 1, P);
-        altitude_hold(h_c, h, hdot, 1, P);
-        pitch_hold(0, theta, q, 1, P);
+        delta_t = airspeed_throttle_hold(Va_c, Va, 1, P);
+        theta_c = altitude_hold(h_c, h, hdot, 1, P);
+        delta_e = pitch_hold(theta_c, theta, q, 1, P);
         
-    end
+    else
     
     delta_t = airspeed_throttle_hold(Va_c, Va, 0, P);
     theta_c = altitude_hold(h_c, h, hdot, 0, P);
 
     delta_e = pitch_hold(theta_c, theta, q, 0, P);
+    
+    end
     
     %----------------------------------------------------------
     % create outputs
@@ -305,6 +312,29 @@ end
 % Autopilot functions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% COURSE HOLD****************************************************
+function phi_c = course_hold(chi_c, chi, r, flag, P)
+    persistent chi_integrator;
+    persistent chi_error_d1;
+    
+    if flag == 1
+        chi_integrator = 0;
+    end
+    
+    error = chi_c - chi;
+
+    % compute output command and saturate
+    u_unsat = P.kp_chi*error + P.ki_chi*chi_integrator;
+    phi_c = sat(u_unsat, 15*pi/180, -15*pi/180);
+    
+    chi_error_d1 = error; % store old error value
+    
+    % integrator anti-windup
+    if r < (1*pi/180)
+        chi_integrator = chi_integrator + P.Ts/2*(error + chi_error_d1);
+    end
+end
+
 % ROLL HOLD**********************************************
 function delta_a = roll_hold(phi_c, phi, p, flag, P)
     persistent phi_integrator;
@@ -325,143 +355,12 @@ function delta_a = roll_hold(phi_c, phi, p, flag, P)
     delta_a = sat(u_unsat, P.delta_a_up, P.delta_a_down);
     
     % integrator anti-windup
-    if P.ki_phi ~= 0
+    if P.ki_phi ~= 0% < 5*pi/180
         phi_integrator = phi_integrator + P.Ts/P.ki_phi*(delta_a - u_unsat);
     end
     
-    phi_error_d1 = error; % store old error value
+    phi_error_d1 = error; % store old error value    
 
-end
-
-% COURSE HOLD****************************************************
-function phi_c = course_hold(chi_c, chi, r, flag, P)
-    persistent chi_integrator;
-    persistent chi_error_d1;
-    
-    if flag == 1
-        chi_integrator = 0;
-    end
-    
-    error = chi_c - chi;
-
-    % compute output command and saturate
-    u_unsat = P.kp_chi*error + P.ki_chi*chi_integrator;
-    phi_c = sat(u_unsat, 15*pi/180, -15*pi/180);
-    
-    chi_error_d1 = error; % store old error value
-    
-    % integrator anti-windup
-    if r < (.05*pi/180)
-        chi_integrator = chi_integrator + P.Ts/2*(error + chi_error_d1);
-    end
-end
-
-% SLIDESLIP HOLD************************************************
-function delta_r = sideslip_hold(beta_air,flag,P)
-    persistent beta_integrator;
-    persistent beta_error_d1;
-    
-    if flag == 1
-        beta_integrator = 0;
-        beta_error_d1 = 0;
-    end
-    
-    % discrete integrator
-    beta_integrator = beta_integrator + P.Ts/2*(beta_air + beta_error_d1);
-    
-    % compute output command and saturate
-    delta_r = sat(-P.kp_beta*beta_air - P.ki_beta*beta_integrator, P.delta_r_up,...
-        P.delta_r_down);
-    
-    beta_error_d1 = beta_air; % store old error value
-    
-    % integrator anti-windup
-    if P.ki_beta ~= 0
-        u_unsat = P.kp_beta*beta_air + P.ki_beta*beta_integrator;
-        beta_integrator = beta_integrator + P.Ts/P.ki_beta*(delta_r - u_unsat);
-    end
-end
-
-% PITCH ALTITUDE HOLD************************************
-function delta_e = pitch_hold(theta_c, theta, q, flag, P)
-
-    persistent theta_integrator;
-    persistent theta_integrator_d1;
-
-    if flag == 1
-        theta_integrator = 0;
-        theta_integrator_d1 = 0;
-    end
-    
-    error = theta_c - theta; % define theta error
-    
-    % integrated error - discrete algorithm
-    theta_integrator = theta_integrator + P.Ts/2*(error + theta_integrator_d1);
-
-    % Saturated elevator command
-    u_unsat = P.kp_theta*error - P.kd_theta*q - P.ki_theta*theta_integrator;
-    delta_e = sat(u_unsat, P.delta_e_up, P.delta_e_down);
-    
-    % Integrator anti-windup scheme
-    if P.ki_theta ~= 0
-        theta_integrator = theta_integrator + P.Ts/2*(delta_e - u_unsat);
-    end
-
-end
-% ALTITUDE HOLD USING PITCH **********************************
-function theta_c = altitude_hold(h_c, h, hdot, flag, P)
-    persistent h_integrator;
-    persistent h_error_d1;
-    
-    if flag == 1
-        h_integrator = 0;
-        h_error_d1 = 0;
-    end
-    
-    error = h_c - h;
-    
-    % discrete integrator
-%     h_integrator = h_integrator + P.Ts/2*(error + h_error_d1);
-%     h_integrator = 0;
-    
-    % compute output command        
-    u_unsat = P.kp_h*error + P.ki_h*h_integrator - P.kd_h*hdot;
-    theta_c = sat(u_unsat, 15*pi/180, -15*pi/180);
-    
-    % integrator anti-windup
-    if hdot < 1/8
-        h_integrator = h_integrator + P.Ts/2*(error + h_error_d1);
-    end    
-    
-    h_error_d1 = error; % store old error value    
-
-end
-
-% AIRSPEED HOLD USING PITCH ******************************************
-function theta_c = airspeed_pitch_hold(Va_c, Va, flag, P)
-    persistent Va_integrator;
-    persistent Va_error_d1;
-    
-    if flag == 1
-        Va_integrator = 0;
-        Va_error_d1 = 0;
-    end
-    
-    error = Va_c - Va;
-    
-    % discrete integrator
-    Va_integrator = Va_integrator + P.Ts/2*(error + Va_error_d1);
-    
-    % compute output command and saturate
-    theta_c = P.kp_V2*error + P.ki_V2*Va_integrator;
-    
-    Va_error_d1 = error; % store old error value
-    
-    % integrator anti-windup
-    if P.ki_V2 ~= 0
-        u_unsat = P.kp_V2*error + P.ki_V2*Va_integrator;
-        Va_integrator = Va_integrator + P.Ts/P.ki_V2*(theta_c - u_unsat);
-    end
 end
 
 % AIRSPEED HOLD USING THROTTLE ********************************
@@ -488,6 +387,62 @@ function delta_t = airspeed_throttle_hold(Va_c, Va, flag, P)
     % integrator anti-windup
     if P.ki_V ~= 0
         Va_integrator = Va_integrator + P.Ts/P.ki_V*(delta_t - u_unsat);
+    end
+
+end
+
+% ALTITUDE HOLD USING PITCH **********************************
+function theta_c = altitude_hold(h_c, h, hdot, flag, P)
+    persistent h_integrator;
+    persistent h_error_d1;
+    
+    if flag == 1
+        h_integrator = 0;
+        h_error_d1 = 0;
+    end
+    
+    error = h_c - h;
+    
+    % discrete integrator
+%     h_integrator = h_integrator + P.Ts/2*(error + h_error_d1);
+%     h_integrator = 0;
+    
+    % compute output command        
+    u_unsat = P.kp_h*error + P.ki_h*h_integrator - P.kd_h*hdot;
+    theta_c = sat(u_unsat, 15*pi/180, -15*pi/180);
+    
+    % integrator anti-windup
+    if hdot < 1/10
+        h_integrator = h_integrator + P.Ts/2*(error + h_error_d1);
+    end    
+    
+    h_error_d1 = error; % store old error value    
+
+end
+
+% PITCH ALTITUDE HOLD************************************
+function delta_e = pitch_hold(theta_c, theta, q, flag, P)
+
+    persistent theta_integrator;
+    persistent theta_integrator_d1;
+
+    if flag == 1
+        theta_integrator = 0;
+        theta_integrator_d1 = 0;
+    end
+    
+    error = theta_c - theta; % define theta error
+    
+    % integrated error - discrete algorithm
+%     theta_integrator = theta_integrator + P.Ts/2*(error + theta_integrator_d1);
+
+    % Saturated elevator command
+    u_unsat = P.kp_theta*error - P.kd_theta*q - P.ki_theta*theta_integrator;
+    delta_e = sat(u_unsat, P.delta_e_up, P.delta_e_down);
+    
+    % Integrator anti-windup scheme
+    if q < 5*pi/180
+        theta_integrator = theta_integrator + P.Ts/2*(delta_e - u_unsat);
     end
 
 end

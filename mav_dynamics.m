@@ -46,8 +46,6 @@ phi_c = course_hold(chi_c,psi, r, flag,P);
 
 delta_a = roll_hold(phi_c,phi,p,flag,P);
 
-
-
 % Autopilot - Longitudinal (using altitude hold controllers)
 delta_t = airspeed_throttle_hold(Va_c, Va, flag, P);
 
@@ -91,11 +89,7 @@ p_dot = P.Gamma1*p*q - P.Gamma2*q*r + P.Gamma3*ell + P.Gamma4*n;
 q_dot = P.Gamma5*p*r - P.Gamma6*(p^2 - r^2) + m/P.Jy;
 r_dot = P.Gamma7*p*q - P.Gamma1*q*r + P.Gamma4*ell + P.Gamma8*n;
 
-xdot = [...
-    pn_dot; pe_dot; pd_dot; ...
-    u_dot; v_dot; w_dot; ...
-    phi_dot; theta_dot; psi_dot; ...
-    p_dot; q_dot; r_dot]; % assign derivatives of states to xdot
+xdot = [pn_dot; pe_dot; pd_dot; u_dot; v_dot; w_dot; phi_dot; theta_dot; psi_dot; p_dot; q_dot; r_dot]; % assign derivatives of states to xdot
 end
 
 %% Autopilot Controllers
