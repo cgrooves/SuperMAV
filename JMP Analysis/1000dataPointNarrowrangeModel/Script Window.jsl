@@ -1,0 +1,307 @@
+
+Fit Group(
+	Fit Model(
+		Y( :chi_out_1 ),
+		Effects(
+			:phi_gains_1,
+			:phi_gains_2,
+			:phi_gains_3,
+			:chi_gains_1,
+			:chi_gains_2,
+			:theta_gains_1,
+			:theta_gains_2,
+			:h_gains_1,
+			:phi_gains_1 * :phi_gains_2,
+			:phi_gains_1 * :theta_gains_1,
+			:phi_gains_1 * :theta_gains_2,
+			:phi_gains_1 * :h_gains_1,
+			:phi_gains_2 * :chi_gains_1,
+			:phi_gains_2 * :chi_gains_2,
+			:phi_gains_2 * :theta_gains_1,
+			:phi_gains_2 * :theta_gains_2,
+			:phi_gains_3 * :chi_gains_1,
+			:phi_gains_3 * :theta_gains_2,
+			:chi_gains_1 * :chi_gains_2,
+			:chi_gains_1 * :theta_gains_2,
+			:theta_gains_2 * :h_gains_1,
+			:phi_gains_1 * :phi_gains_2 * :theta_gains_1,
+			:phi_gains_1 * :phi_gains_2 * :theta_gains_2,
+			:phi_gains_1 * :theta_gains_2 * :h_gains_1,
+			:phi_gains_2 * :chi_gains_1 * :chi_gains_2,
+			:phi_gains_3 * :chi_gains_1 * :theta_gains_2,
+			:phi_gains_2 * :phi_gains_2,
+			:phi_gains_2 * :phi_gains_2 * :phi_gains_2,
+			:phi_gains_3 * :phi_gains_3,
+			:chi_gains_2 * :chi_gains_2,
+			:chi_gains_2 * :chi_gains_2 * :chi_gains_2
+		),
+		Personality( "Standard Least Squares" ),
+		Emphasis( "Minimal Report" ),
+		Run(
+			:chi_out_1 << {Lack of Fit( 0 ), Plot Actual by Predicted( 0 ),
+			Plot Regression( 0 ), Plot Residual by Predicted( 0 ),
+			Plot Effect Leverage( 0 )}
+		)
+	),
+	Fit Model(
+		Y( :chi_out_2 ),
+		Effects(
+			:phi_gains_1,
+			:phi_gains_2,
+			:phi_gains_3,
+			:chi_gains_1,
+			:chi_gains_2,
+			:phi_gains_1 * :phi_gains_3,
+			:phi_gains_1 * :chi_gains_1,
+			:phi_gains_1 * :chi_gains_2,
+			:phi_gains_2 * :phi_gains_3,
+			:phi_gains_2 * :chi_gains_1,
+			:phi_gains_2 * :chi_gains_2,
+			:phi_gains_3 * :chi_gains_1,
+			:phi_gains_3 * :chi_gains_2,
+			:chi_gains_1 * :chi_gains_2,
+			:phi_gains_1 * :phi_gains_3 * :chi_gains_2,
+			:phi_gains_1 * :chi_gains_1 * :chi_gains_2,
+			:phi_gains_2 * :phi_gains_3 * :chi_gains_1,
+			:phi_gains_2 * :phi_gains_3 * :chi_gains_2,
+			:phi_gains_2 * :chi_gains_1 * :chi_gains_2,
+			:phi_gains_3 * :chi_gains_1 * :chi_gains_2,
+			:phi_gains_3 * :phi_gains_3
+		),
+		Personality( "Standard Least Squares" ),
+		Emphasis( "Minimal Report" ),
+		Run(
+			:chi_out_2 << {Lack of Fit( 0 ), Plot Actual by Predicted( 0 ),
+			Plot Regression( 0 ), Plot Residual by Predicted( 0 ),
+			Plot Effect Leverage( 0 )}
+		)
+	),
+	Fit Model(
+		Y( :chi_out_3 ),
+		Effects(
+			:phi_gains_1,
+			:phi_gains_2,
+			:phi_gains_3,
+			:chi_gains_1,
+			:chi_gains_2,
+			:theta_gains_1,
+			:phi_gains_1 * :phi_gains_2,
+			:phi_gains_1 * :phi_gains_3,
+			:phi_gains_1 * :chi_gains_1,
+			:phi_gains_1 * :chi_gains_2,
+			:phi_gains_1 * :theta_gains_1,
+			:phi_gains_2 * :phi_gains_3,
+			:phi_gains_2 * :chi_gains_2,
+			:phi_gains_2 * :theta_gains_1,
+			:phi_gains_3 * :chi_gains_1,
+			:phi_gains_3 * :chi_gains_2,
+			:phi_gains_1 * :phi_gains_2 * :theta_gains_1,
+			:phi_gains_1 * :phi_gains_3 * :chi_gains_1,
+			:phi_gains_1 * :phi_gains_3 * :chi_gains_2,
+			:phi_gains_2 * :phi_gains_3 * :chi_gains_2,
+			:phi_gains_2 * :phi_gains_2,
+			:phi_gains_3 * :phi_gains_3
+		),
+		Personality( "Standard Least Squares" ),
+		Emphasis( "Minimal Report" ),
+		Run(
+			:chi_out_3 << {Lack of Fit( 0 ), Plot Actual by Predicted( 0 ),
+			Plot Regression( 0 ), Plot Residual by Predicted( 0 ),
+			Plot Effect Leverage( 0 )}
+		)
+	),
+	Fit Model(
+		Y( :h_out_1 ),
+		Effects(
+			:phi_gains_1,
+			:phi_gains_2,
+			:phi_gains_3,
+			:theta_gains_2,
+			:h_gains_1,
+			:h_gains_3,
+			:phi_gains_1 * :h_gains_1,
+			:phi_gains_1 * :h_gains_3,
+			:phi_gains_2 * :phi_gains_3,
+			:phi_gains_2 * :theta_gains_2,
+			:phi_gains_2 * :h_gains_1,
+			:phi_gains_2 * :h_gains_3,
+			:phi_gains_3 * :h_gains_1,
+			:theta_gains_2 * :h_gains_3,
+			:h_gains_1 * :h_gains_3,
+			:phi_gains_1 * :h_gains_1 * :h_gains_3,
+			:phi_gains_2 * :phi_gains_3 * :h_gains_1,
+			:phi_gains_2 * :theta_gains_2 * :h_gains_3,
+			:phi_gains_2 * :phi_gains_2,
+			:phi_gains_2 * :phi_gains_2 * :phi_gains_2,
+			:h_gains_1 * :h_gains_1,
+			:h_gains_3 * :h_gains_3
+		),
+		Personality( "Standard Least Squares" ),
+		Emphasis( "Minimal Report" ),
+		Run(
+			:h_out_1 << {Lack of Fit( 0 ), Plot Actual by Predicted( 0 ),
+			Plot Regression( 0 ), Plot Residual by Predicted( 0 ),
+			Plot Effect Leverage( 0 )}
+		)
+	),
+	Fit Model(
+		Y( :h_out_2 ),
+		Effects(
+			:phi_gains_1,
+			:phi_gains_2,
+			:phi_gains_3,
+			:theta_gains_1,
+			:theta_gains_2,
+			:h_gains_1,
+			:h_gains_3,
+			:phi_gains_1 * :h_gains_3,
+			:phi_gains_2 * :phi_gains_3,
+			:phi_gains_2 * :theta_gains_1,
+			:phi_gains_2 * :theta_gains_2,
+			:phi_gains_2 * :h_gains_1,
+			:phi_gains_2 * :h_gains_3,
+			:phi_gains_3 * :h_gains_3,
+			:theta_gains_1 * :h_gains_3,
+			:theta_gains_2 * :h_gains_3,
+			:h_gains_1 * :h_gains_3,
+			:phi_gains_2 * :phi_gains_3 * :h_gains_3,
+			:phi_gains_2 * :theta_gains_1 * :h_gains_3,
+			:phi_gains_2 * :theta_gains_2 * :h_gains_3,
+			:phi_gains_2 * :h_gains_1 * :h_gains_3,
+			:phi_gains_2 * :phi_gains_2,
+			:h_gains_3 * :h_gains_3
+		),
+		Personality( "Standard Least Squares" ),
+		Emphasis( "Minimal Report" ),
+		Run(
+			:h_out_2 << {Lack of Fit( 0 ), Plot Actual by Predicted( 0 ),
+			Plot Regression( 0 ), Plot Residual by Predicted( 0 ),
+			Plot Effect Leverage( 0 )}
+		)
+	),
+	Fit Model(
+		Y( :h_out_3 ),
+		Effects(
+			:phi_gains_1,
+			:phi_gains_2,
+			:phi_gains_3,
+			:theta_gains_1,
+			:theta_gains_2,
+			:h_gains_1,
+			:h_gains_2,
+			:h_gains_3,
+			:phi_gains_1 * :phi_gains_2,
+			:phi_gains_1 * :theta_gains_1,
+			:phi_gains_1 * :theta_gains_2,
+			:phi_gains_1 * :h_gains_1,
+			:phi_gains_1 * :h_gains_3,
+			:phi_gains_2 * :phi_gains_3,
+			:phi_gains_2 * :theta_gains_1,
+			:phi_gains_2 * :theta_gains_2,
+			:phi_gains_2 * :h_gains_1,
+			:phi_gains_2 * :h_gains_3,
+			:phi_gains_3 * :theta_gains_1,
+			:phi_gains_3 * :theta_gains_2,
+			:phi_gains_3 * :h_gains_2,
+			:phi_gains_3 * :h_gains_3,
+			:theta_gains_1 * :h_gains_1,
+			:theta_gains_1 * :h_gains_2,
+			:theta_gains_1 * :h_gains_3,
+			:theta_gains_2 * :h_gains_1,
+			:theta_gains_2 * :h_gains_3,
+			:h_gains_1 * :h_gains_2,
+			:h_gains_1 * :h_gains_3,
+			:phi_gains_1 * :phi_gains_2 * :theta_gains_1,
+			:phi_gains_1 * :phi_gains_2 * :h_gains_1,
+			:phi_gains_1 * :theta_gains_1 * :h_gains_3,
+			:phi_gains_2 * :phi_gains_3 * :theta_gains_2,
+			:phi_gains_2 * :phi_gains_3 * :h_gains_3,
+			:phi_gains_2 * :theta_gains_1 * :h_gains_1,
+			:phi_gains_2 * :theta_gains_2 * :h_gains_1,
+			:phi_gains_2 * :h_gains_1 * :h_gains_3,
+			:phi_gains_3 * :theta_gains_1 * :h_gains_2,
+			:phi_gains_3 * :theta_gains_2 * :h_gains_3,
+			:theta_gains_1 * :h_gains_1 * :h_gains_2,
+			:phi_gains_2 * :phi_gains_2,
+			:h_gains_3 * :h_gains_3
+		),
+		Personality( "Standard Least Squares" ),
+		Emphasis( "Minimal Report" ),
+		Run(
+			:h_out_3 << {Lack of Fit( 0 ), Plot Actual by Predicted( 0 ),
+			Plot Regression( 0 ), Plot Residual by Predicted( 0 ),
+			Plot Effect Leverage( 0 )}
+		)
+	),
+	Fit Model(
+		Y( :p_out ),
+		Effects(
+			:phi_gains_1,
+			:phi_gains_2,
+			:phi_gains_3,
+			:chi_gains_1,
+			:phi_gains_1 * :phi_gains_2,
+			:phi_gains_1 * :phi_gains_3,
+			:phi_gains_1 * :chi_gains_1,
+			:phi_gains_2 * :phi_gains_3,
+			:phi_gains_2 * :chi_gains_1,
+			:phi_gains_1 * :phi_gains_2 * :phi_gains_3,
+			:phi_gains_1 * :phi_gains_2 * :chi_gains_1,
+			:phi_gains_2 * :phi_gains_2,
+			:phi_gains_2 * :phi_gains_2 * :phi_gains_2,
+			:phi_gains_3 * :phi_gains_3
+		),
+		Personality( "Standard Least Squares" ),
+		Emphasis( "Minimal Report" ),
+		Run(
+			:p_out << {Lack of Fit( 0 ), Plot Actual by Predicted( 0 ),
+			Plot Regression( 0 ), Plot Residual by Predicted( 0 ),
+			Plot Effect Leverage( 0 )}
+		)
+	),
+	<<{Profiler(
+		1,
+		Confidence Intervals( 1 ),
+		Desirability Functions( 1 ),
+		chi_out_1 << Response Limits(
+			{Lower( 5, 0.931309418969581 ), Middle( 6.50169366424728, 0.5 ),
+			Upper( 7.98824073853726, 0.066 ), Goal( "Minimize" ), Importance( 1 )}
+		),
+		chi_out_2 << Response Limits(
+			{Lower( 6.19318181818182, 0.99 ), Middle( 22.59542183757, 0.5 ),
+			Upper( 35.9984748944502, 0.066 ), Goal( "Minimize" ), Importance( 1 )}
+		),
+		chi_out_3 << Response Limits(
+			{Lower( 1.70454545454545, 0.99 ), Middle( 13.1204083065694, 0.5 ),
+			Upper( 24.7191143058442, 0.066 ), Goal( "Minimize" ), Importance( 1 )}
+		),
+		h_out_1 << Response Limits(
+			{Lower( 5.68181818181818, 0.964 ), Middle( 25.7599801774598, 0.5 ),
+			Upper( 48.5785020460041, 0.066 ), Goal( "Minimize" ), Importance( 1 )}
+		),
+		h_out_2 << Response Limits(
+			{Lower( 2.84090909090909, 0.9524 ), Middle( 27.0985742684699, 0.5 ),
+			Upper( 49.9855555178511, 0.066 ), Goal( "Minimize" ), Importance( 1 )}
+		),
+		h_out_3 << Response Limits(
+			{Lower( 1.81818181818182, 0.99 ), Middle( 19.9808324463512, 0.5 ),
+			Upper( 39.9616648927023, 0.066 ), Goal( "Minimize" ), Importance( 1 )}
+		),
+		p_out << Response Limits(
+			{Lower( 0.340909090909091, 0.9872 ), Middle( 6.92931118961916, 0.5 ),
+			Upper( 13.5409121544162, 0.066 ), Goal( "Minimize" ), Importance( 1 )}
+		),
+		Term Value(
+			phi_gains_1( 1, Lock( 0 ), Show( 1 ) ),
+			phi_gains_2( 0, Lock( 0 ), Show( 1 ) ),
+			phi_gains_3( 0.1, Lock( 0 ), Show( 1 ) ),
+			chi_gains_1( 1.5, Lock( 0 ), Show( 1 ) ),
+			chi_gains_2( 0.0368525870982191, Lock( 0 ), Show( 1 ) ),
+			theta_gains_1( -2, Lock( 0 ), Show( 1 ) ),
+			theta_gains_2( -0.6, Lock( 0 ), Show( 1 ) ),
+			h_gains_1( 0.01, Lock( 0 ), Show( 1 ) ),
+			h_gains_3( 0.005995996, Lock( 0 ), Show( 1 ) ),
+			h_gains_2( 0.003, Lock( 0 ), Show( 1 ) )
+		)
+	)}
+);

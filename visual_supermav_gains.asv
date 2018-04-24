@@ -28,17 +28,17 @@ if testing == 1
 kp_chi = 1.5;
 ki_chi = 0.04;
 
-kp_phi = 1;
-kd_phi = 0;
-ki_phi = .1;
+kp_phi = 0.996;
+kd_phi = 0.4;
+ki_phi = 0.484;
 
-kp_h = 0.01;
+kp_h = 0.019;
 kd_h = 0.003;
 ki_h = 0.006;
 
-kp_theta = -2;
-kd_theta = -.6;
-ki_theta = 0.5 ;
+kp_theta = -.989;
+kd_theta = -.228;
+ki_theta = .696 ;
 
 kp_V = 0.204;
 ki_V = 0.45;

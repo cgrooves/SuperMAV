@@ -52,11 +52,11 @@ function plotMAVStateVariables(uu)
 %    bx_hat      = uu(47);            % estimated x-gyro bias
 %    by_hat      = uu(48);            % estimated y-gyro bias
 %    bz_hat      = uu(49);            % estimated z-gyro bias
-    delta_e     = 180/pi*uu(50);     % elevator angle (degrees)
-    delta_a     = 180/pi*uu(51);     % aileron angle (degrees)
-    delta_r     = 180/pi*uu(52);     % rudder angle (degrees)
-    delta_t     = uu(53);            % throttle setting (unitless)
-    t           = uu(54);            % simulation time
+    delta_e     = 180/pi*uu(53);     % elevator angle (degrees)
+    delta_a     = 180/pi*uu(54);     % aileron angle (degrees)
+    delta_r     = 180/pi*uu(55);     % rudder angle (degrees)
+    delta_t     = uu(56);            % throttle setting (unitless)
+    t           = uu(57);            % simulation time
     
     % compute course angle
     chi = 180/pi*atan2(Va*sin(psi)+we, Va*cos(psi)+wn);

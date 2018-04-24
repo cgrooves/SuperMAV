@@ -108,7 +108,7 @@ P.Ts = 0.01;
 % first cut at initial conditions
 P.pn0    = 0;  % initial North position
 P.pe0    = 0;  % initial East position
-P.pd0    = 0;  % initial Down position (negative altitude)
+P.pd0    = -100;  % initial Down position (negative altitude)
 P.u0     = P.Va0; % initial velocity along body x-axis
 P.v0     = 0;  % initial velocity along body y-axis
 P.w0     = 0;  % initial velocity along body z-axis
@@ -130,7 +130,7 @@ P.x_trim = x_trim;
 % initial conditions
 P.pn0    = 0;  % initial North position
 P.pe0    = 0;  % initial East position
-P.pd0    = 0;  % initial Down position (negative altitude)
+P.pd0    = -100;  % initial Down position (negative altitude)
 P.u0     = x_trim(4);  % initial velocity along body x-axis
 P.v0     = x_trim(5);  % initial velocity along body y-axis
 P.w0     = x_trim(6);  % initial velocity along body z-axis
@@ -279,10 +279,22 @@ P.wn_v = P.wn_v2;
 P.Ki_v = P.wn_v^2/P.a_V2;
 P.Kp_v = (2 * zetaV * P.wn_v - P.a_V1)/P.a_V2;
 
+run('compute_gains.m')
 
 
 
 
+% Set control surface limits
+P.delta_e_up = 45*pi/180;
+P.delta_e_down = -45*pi/180;
 
+P.delta_a_up = 30*pi/180;
+P.delta_a_down = -30*pi/180;
+
+P.delta_r_up = 45*pi/180;
+P.delta_r_down = -45*pi/180;
+
+P.delta_t_up = 1;
+P.delta_t_down = 0;
 
 

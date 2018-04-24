@@ -36,9 +36,9 @@ function xhat = true_states(uu,P)
     pn       = uu(1+NN);  % inertial North position
     pe       = uu(2+NN);  % inertial East position
     h        = -uu(3+NN); % altitude
-%    u        = uu(4+NN);  % inertial velocity along body x-axis
-%    v        = uu(5+NN);  % inertial velocity along body y-axis
-%    w        = uu(6+NN);  % inertial velocity along body z-axis
+    u        = uu(4+NN);  % inertial velocity along body x-axis
+    v        = uu(5+NN);  % inertial velocity along body y-axis
+    w        = uu(6+NN);  % inertial velocity along body z-axis
     phi      = uu(7+NN);  % roll angle
     theta    = uu(8+NN);  % pitch angle
     psi      = uu(9+NN);  % yaw angle
@@ -99,6 +99,9 @@ function xhat = true_states(uu,P)
         bxhat;...
         byhat;...
         bzhat;...
+        u;...
+        v;...
+        w;...
         ];
     
 end 
